@@ -10,7 +10,15 @@ import {
 } from "../types"; // Import necessary types
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:3000/api/v1/cards", // Replace with your actual API base URL
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL + "/cards",
+});
+
+apiClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem("access_token");
+  if (token) {
+    config.headers["Authorization"] = `Bearer ${token}`;
+  }
+  return config;
 });
 
 export const CardsService = {

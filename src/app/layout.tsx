@@ -1,6 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import Header from "./components/Header";
 import { Metadata } from "next";
+import { AuthProvider } from "./contexts/AuthContext";
 
 export const metadata: Metadata = {
   title: "Pokemon TGC App",
@@ -16,8 +17,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ChakraProvider>
-          <Header />
-          {children}
+          <AuthProvider>
+            <Header />
+            {children}
+          </AuthProvider>
         </ChakraProvider>
       </body>
     </html>

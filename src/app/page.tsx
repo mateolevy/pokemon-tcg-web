@@ -8,7 +8,9 @@ import { CardsService } from "./services/cardsService";
 import Pagination from "./components/Pagination";
 import Filter from "./components/Filter";
 import CardSkeleton from "./components/CardSkeleton";
-export default function CardsPage() {
+import withAuth from "./hocs/withAuth";
+
+function CardsPage() {
   const [cards, setCards] = useState<CardDto[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -94,3 +96,5 @@ export default function CardsPage() {
     </Container>
   );
 }
+
+export default withAuth(CardsPage);

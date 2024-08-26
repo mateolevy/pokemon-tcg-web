@@ -16,6 +16,7 @@ import Card from "../../components/Card";
 import { CardDto, BattleResultDto } from "../../types";
 import { CardsService } from "../../services/cardsService";
 import OpponentSelect from "../../components/OpponentSelect";
+import withAuth from "@/app/hocs/withAuth";
 
 const CardDetail = ({
   onBattle,
@@ -140,4 +141,4 @@ const CardDetail = ({
   );
 };
 
-export default CardDetail;
+export default withAuth(CardDetail);

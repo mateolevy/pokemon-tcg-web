@@ -87,3 +87,25 @@ export class PaginatedResultDto<T> {
     this.limit = limit;
   }
 }
+
+export interface SignInDto {
+  email: string;
+  password: string;
+}
+
+export interface SignUpDto {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+export interface AuthResponseDto {
+  access_token: string;
+}
+
+export interface UserProfileDto {
+  email: string;
+  firstName: string;
+  lastName: string;
+}
