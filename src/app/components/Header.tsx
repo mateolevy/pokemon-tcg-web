@@ -32,10 +32,12 @@ const Header = () => {
       color="white"
       align="center"
       position="relative"
+      minH="60px" // Set a minimum height for the header
     >
-      {isAuthenticated && (
-        <Text mr={4}>Hello {`${user?.firstName} ${user?.lastName}`}!</Text>
-      )}
+      {isAuthenticated &&
+        (displayMenu ? null : (
+          <Text mr={4}>Hello {`${user?.firstName} ${user?.lastName}`}!</Text>
+        ))}
       <Spacer />
 
       <Box position="absolute" left="50%" transform="translateX(-50%)">

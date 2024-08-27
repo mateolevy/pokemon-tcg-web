@@ -23,6 +23,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -33,10 +34,13 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await login({ email, password });
     } catch (err) {
       setError("Invalid email or password. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -71,7 +75,12 @@ const LoginPage = () => {
               required
             />
           </FormControl>
-          <Button type="submit" colorScheme="blue" width="full">
+          <Button
+            type="submit"
+            colorScheme="blue"
+            width="full"
+            isLoading={loading}
+          >
             Sign In
           </Button>
         </form>

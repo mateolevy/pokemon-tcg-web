@@ -1,14 +1,4 @@
-import {
-  Box,
-  Button,
-  Select,
-  HStack,
-  VStack,
-  Text,
-  Input,
-  useBreakpointValue,
-  StackDirection,
-} from "@chakra-ui/react";
+import { Box, Button, Select, Text, Input, SimpleGrid } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { CardsService } from "../services/cardsService";
 import { SetDto, TypeDto } from "../types";
@@ -49,23 +39,12 @@ const Filter = ({ onFilterChange }: FilterProps) => {
     onFilterChange({ name, typeId, setId });
   };
 
-  const stackDirection = useBreakpointValue({
-    base: "column",
-    md: "row",
-  }) as StackDirection;
-
   if (error) return <Text color="red.500">{error}</Text>;
 
   return (
-    <VStack spacing={4} align="stretch" mb={4}>
-      <HStack
-        spacing={4}
-        width="100%"
-        direction={stackDirection}
-        alignItems="flex-start"
-        wrap="wrap"
-      >
-        <Box flex="1">
+    <Box mb={6}>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={4} width="100%">
+        <Box>
           <Input
             placeholder="Search by name"
             value={name}
@@ -73,7 +52,7 @@ const Filter = ({ onFilterChange }: FilterProps) => {
             width="100%"
           />
         </Box>
-        <Box flex="1">
+        <Box>
           <Select
             placeholder="Filter by type"
             value={typeId}
@@ -87,7 +66,7 @@ const Filter = ({ onFilterChange }: FilterProps) => {
             ))}
           </Select>
         </Box>
-        <Box flex="1">
+        <Box>
           <Select
             placeholder="Filter by set"
             value={setId}
@@ -106,8 +85,8 @@ const Filter = ({ onFilterChange }: FilterProps) => {
             Apply Filters
           </Button>
         </Box>
-      </HStack>
-    </VStack>
+      </SimpleGrid>
+    </Box>
   );
 };
 

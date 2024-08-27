@@ -26,6 +26,7 @@ const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -36,10 +37,13 @@ const SignupPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await signup({ firstName, lastName, email, password });
     } catch (err) {
       setError("Signup failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -93,7 +97,12 @@ const SignupPage = () => {
               required
             />
           </FormControl>
-          <Button type="submit" colorScheme="blue" width="full">
+          <Button
+            type="submit"
+            colorScheme="blue"
+            width="full"
+            isLoading={loading} // Apply loading state
+          >
             Sign Up
           </Button>
         </form>
