@@ -43,7 +43,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       router.push("/");
     } catch (error) {
       console.error("Failed to sign up:", error);
-      throw error; // Propagate the error to the caller
+      throw error;
     }
   };
 

@@ -1,5 +1,3 @@
-// services/cardsService.ts
-
 import axios from "axios";
 import {
   CreateCardDto,
@@ -7,7 +5,8 @@ import {
   BattleResultDto,
   FindCardsQueryDto,
   PaginatedResultDto,
-} from "../types"; // Import necessary types
+  MetadataDto,
+} from "../types";
 
 const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL + "/cards",
@@ -36,8 +35,7 @@ export const CardsService = {
     return response.data;
   },
 
-  async getCardMetadata(): Promise<any> {
-    // Replace `any` with the actual type if known
+  async getCardMetadata(): Promise<MetadataDto> {
     const response = await apiClient.get("/metadata");
     return response.data;
   },

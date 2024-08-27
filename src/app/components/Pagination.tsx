@@ -26,10 +26,18 @@ const Pagination = ({
   return (
     <HStack justify="center" mt={4}>
       <ButtonGroup isAttached>
-        <Button onClick={handlePrevious} isDisabled={currentPage === 1}>
+        <Button
+          variant="outline"
+          onClick={handlePrevious}
+          isDisabled={currentPage === 1}
+        >
           Previous
         </Button>
-        <Button onClick={handleNext} isDisabled={currentPage === totalPages}>
+        <Button
+          variant="outline"
+          onClick={handleNext}
+          isDisabled={currentPage === totalPages}
+        >
           Next
         </Button>
       </ButtonGroup>

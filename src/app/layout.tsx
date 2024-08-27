@@ -2,6 +2,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Header from "./components/Header";
 import { Metadata } from "next";
 import { AuthProvider } from "./contexts/AuthContext";
+import theme from "./theme";
 
 export const metadata: Metadata = {
   title: "Pokemon TGC App",
@@ -16,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
           <AuthProvider>
             <Header />
             {children}

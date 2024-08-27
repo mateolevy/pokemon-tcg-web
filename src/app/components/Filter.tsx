@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { CardsService } from "../services/cardsService";
+import { SetDto, TypeDto } from "../types";
 
 interface FilterProps {
   onFilterChange: (filters: {
@@ -25,8 +26,8 @@ const Filter = ({ onFilterChange }: FilterProps) => {
   const [typeId, setTypeId] = useState<string>("");
   const [setId, setSetId] = useState<string>("");
 
-  const [types, setTypes] = useState<{ id: string; name: string }[]>([]);
-  const [sets, setSets] = useState<{ id: string; name: string }[]>([]);
+  const [types, setTypes] = useState<TypeDto[]>([]);
+  const [sets, setSets] = useState<SetDto[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {

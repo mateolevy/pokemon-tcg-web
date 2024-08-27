@@ -26,6 +26,27 @@ export interface CreateResistanceDto {
   value: number;
 }
 
+export interface MetadataDto {
+  types: TypeDto[];
+  rarities: RarityDto[];
+  sets: SetDto[];
+}
+
+export interface TypeDto {
+  id: string;
+  name: string;
+}
+
+export interface RarityDto {
+  id: string;
+  name: string;
+}
+
+export interface SetDto {
+  id: string;
+  name: string;
+}
+
 export interface CardDto {
   id: string;
   name: string;

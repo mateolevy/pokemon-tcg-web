@@ -15,7 +15,7 @@ const withAuth = (Component: React.FC) => {
     }, [user]);
 
     if (!user) {
-      return null; // You can add a loading spinner here
+      return null; // We could add a loading spinner here
     }
 
     return <Component {...props} />;

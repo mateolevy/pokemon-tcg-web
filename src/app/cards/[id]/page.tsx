@@ -10,6 +10,11 @@ import {
   Spinner,
   Text,
   useBreakpointValue,
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  Center,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Card from "../../components/Card";
@@ -30,6 +35,7 @@ const CardDetail = ({
     null
   );
   const [loading, setLoading] = useState<boolean>(true);
+  const [battleLoading, setBattleLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [battleResult, setBattleResult] = useState<BattleResultDto | null>(
     null
@@ -64,7 +70,7 @@ const CardDetail = ({
   const handleBattleClick = async () => {
     if (selectedOpponent) {
       try {
-        setLoading(true);
+        setBattleLoading(true);
         const result = await CardsService.simulateBattle(
           id as string,
           selectedOpponent.id
@@ -77,7 +83,7 @@ const CardDetail = ({
         setError("Failed to simulate battle");
         console.error(err);
       } finally {
-        setLoading(false);
+        setBattleLoading(false);
       }
     }
   };
@@ -87,10 +93,33 @@ const CardDetail = ({
     setSelectedOpponent(opponent || null);
   };
 
-  if (loading) return <Spinner size="xl" />;
-  if (error) return <Text color="red.500">{error}</Text>;
-  if (!card) return <Text>Card not found</Text>;
+  if (loading) {
+    return (
+      <Center height="80vh">
+        <Spinner size="xl" />
+      </Center>
+    );
+  }
 
+  if (error) {
+    return (
+      <Alert status="error" variant="subtle">
+        <AlertIcon />
+        <AlertTitle mr={2}>Error!</AlertTitle>
+        <AlertDescription>{error}</AlertDescription>
+      </Alert>
+    );
+  }
+
+  if (!card) {
+    return (
+      <Center height="80vh">
+        <Text fontSize="2xl" color="gray.500">
+          Card not found.
+        </Text>
+      </Center>
+    );
+  }
   return (
     <Container maxW="container.md" py={8}>
       <VStack spacing={6} align="center">
@@ -119,7 +148,9 @@ const CardDetail = ({
         <Button
           colorScheme="blue"
           onClick={handleBattleClick}
-          isDisabled={!selectedOpponent}
+          isDisabled={!selectedOpponent || battleLoading}
+          isLoading={battleLoading}
+          loadingText="Battling..."
         >
           Battle!
         </Button>
